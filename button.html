@@ -13,21 +13,49 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
      <script type="text/babel">
       class Button extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            submitBox: 0
+        }
+      }
+        handleButtonSubmit() {
+          alert("you clicked on button")
+          this.setState({
+            submitBox: this.state.submitBox + 1
+          })
+        }
         render() {
-          return (
+          const buttonStyle = {
+            backgroundColor:"purple",
+            color: "white"
+              }
 
+            const imageStyle = {
+              width: 900,
+              height: 600
+            }
+          return (
             <div>
               <input id="name" type="text" />
-              <button style={{backgroundColor:"purple", color: "white" }}>Submit</button>
+              <button onClick={() => this.handleButtonSubmit()} style={buttonStyle}>Submit</button>
+              <h1>Total {this.state.submitBox}</h1>
+              <div>
+              <img src={this.props.img} style={imageStyle} alt="garden path"/>
+              </div>
             </div>
           );
 
         }
       }
 
+      const image = {
+        img: "https://images.pexels.com/photos/130154/pexels-photo-130154.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+      }
+
 
       ReactDOM.render(
-         <Button />, document.getElementById('app')
+         <Button img={image.img}/>, document.getElementById('app')
        );
      </script>
   </body>
